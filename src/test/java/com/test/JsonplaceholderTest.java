@@ -34,13 +34,10 @@ public class JsonplaceholderTest {
     }
 
     @Test
-    public void getArticleDetails() {
+    public void getArticleDetails() throws Exception {
 
-        Article expectedArticle = new Article()
-                .setId(1)
-                .setUserId(1)
-                .setTitle("sunt aut facere repellat provident occaecati excepturi optio reprehenderit")
-                .setBody("quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto");
+        String jsonExpected = new FileOperations().readFile("articles-list.json");
+        List<Article> articlesExpected = getArticlesFromJson(jsonExpected);
 
         Article actualArtice = given().spec(spec)
                 .expect()
@@ -48,7 +45,7 @@ public class JsonplaceholderTest {
                 .when()
                 .get("/posts/1").as(Article.class);
 
-        assertEquals(actualArtice, expectedArticle);
+        assertEquals(actualArtice, articlesExpected.get(0));
 
     }
 
@@ -57,9 +54,10 @@ public class JsonplaceholderTest {
 
         String jsonExpected = new FileOperations().readFile("articles-list.json");
         List<Article> articlesExpected = getArticlesFromJson(jsonExpected);
+
         String jsonActual = given().spec(spec).get("/posts").asString();
-        JsonPath jsonPath = new JsonPath(jsonActual);
-        List<Article> articlesActual = jsonPath.getList("", Article.class);
+        List<Article> articlesActual = new JsonPath(jsonActual).getList("", Article.class);
+
         assertEquals(articlesExpected,articlesActual);
 
     }
