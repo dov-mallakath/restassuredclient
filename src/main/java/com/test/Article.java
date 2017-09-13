@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 
 @Data
 //@EqualsAndHashCode(exclude = {"userId","id"})
+//@EqualsAndHashCode(od = {"title"})
 @Accessors(chain = true)
 public class Article {
 

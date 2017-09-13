@@ -58,7 +58,13 @@ public class JsonplaceholderTest {
         String jsonActual = given().spec(spec).get("/posts").asString();
         List<Article> articlesActual = new JsonPath(jsonActual).getList("", Article.class);
 
-        assertEquals(articlesExpected,articlesActual);
+        Integer counter = 0;
+        for (Article article : articlesActual) {
+            if(article.getUserId()==1){counter++;}
+        }
+
+        assertEquals(articlesActual, articlesExpected);
+        assertEquals(counter, 10, 0.001);
 
     }
 
