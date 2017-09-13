@@ -14,7 +14,7 @@ public class People {
 
 
     @JsonProperty("person")
-    @XmlElement(name = "people")
+    //@XmlElement(name = "people")
     private List<Person> people;
 
     public List<Person> getPeople() {

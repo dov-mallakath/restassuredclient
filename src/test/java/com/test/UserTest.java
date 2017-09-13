@@ -8,14 +8,17 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static com.test.TestUtils.getCars;
 import static com.test.TestUtils.getPeople;
+import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * @author Denys Ovcharuk (DOV) / WorldTicket A/S
@@ -117,4 +120,52 @@ public class UserTest {
         assertEquals(personsExpected, cars.getCar());
     }
 
+    @Test
+    public void getJsonMapKeyAndValueTest() {
+
+        MyPairRS pairRS = given().spec(spec)
+                .expect()
+                .statusCode(200)
+                .when()
+                .get("detail/json/map").as(MyPairRS.class);
+
+        HashMap<MyPair, String> expectedMap = new HashMap<>();
+        expectedMap.put(new MyPair("Abbott", "Costello"),"Comedy");
+        assertTrue(pairRS.getMap().containsValue("Comedy"));
+        assertTrue(pairRS.getMap().containsKey(new MyPair("Abbott", "Costello")));
+        assertTrue(pairRS.getMap().equals(expectedMap));
+
+    }
+
+    @Test
+    public void getJsonMapKeyAndValueCarsTest() {
+
+        CarsPairRS pairRS = given().spec(spec)
+                .expect()
+                .statusCode(200)
+                .when()
+                .get("detail/json/cars/map").as(CarsPairRS.class);
+
+        HashMap<MyPair, String> expectedMap = new HashMap<>();
+        expectedMap.put(new MyPair("AUDI", "100"),"AUDI");
+        expectedMap.put(new MyPair("BMW", "100"),"BMW");
+//        assertTrue(pairRS.getMap().containsValue("Comedy"));
+//        assertTrue(pairRS.getMap().containsKey(new MyPair("Abbott", "Costello")));
+        assertTrue(pairRS.getCarsMap().equals(expectedMap));
+
+    }
+
+
+    @Test
+    public void basicAuthTest() {
+        expect()
+                .statusCode(401)
+                .when()
+                .get("service/secure/person");
+
+        expect()
+                .statusCode(200)
+                .given().auth().basic("admin","admin")
+                .get("service/secure/person");
+    }
 }
