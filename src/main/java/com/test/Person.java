@@ -22,12 +22,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Person {
 
     @XmlElement(name = "firstName")
-    @JsonProperty("firstName")
+    @JsonProperty("first_name")
     private String firstNameElem;
-    @XmlElement(name = "lastName")
+    @XmlElement(name = "last_name")
+    @JsonProperty("last_name")
     private String lastName;
     @XmlElement(name = "id")
     private int id;
+    @JsonProperty("email_field")
     @XmlElement(name = "email")
     private String email;
 

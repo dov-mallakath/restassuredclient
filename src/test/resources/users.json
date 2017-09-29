@@ -1,0 +1,22 @@
+{
+  "person_root":[
+    {
+      "first_name":"Tim",
+      "last_name":"Testerman",
+      "id":"1",
+      "email_field":"test@hascode.com"
+    },
+    {
+      "first_name":"Sara",
+      "last_name":"Stevens",
+      "id":"20",
+      "email_field":"dev@hascode.com"
+    },
+    {
+      "first_name":"Mark",
+      "last_name":"Mustache",
+      "id":"11",
+      "email_field":"devnull@hascode.com"
+    }
+  ]
+}

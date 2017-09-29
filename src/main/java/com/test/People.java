@@ -1,6 +1,7 @@
 package com.test;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
  * @author Denys Ovcharuk (DOV) / WorldTicket A/S
  * @since 2017-09-11
  */
-
+@Data
 public class People {
 
 
-    @JsonProperty("person")
+    @JsonProperty("person_root")
     //@XmlElement(name = "people")
     private List<Person> people;
 
