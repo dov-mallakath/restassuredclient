@@ -14,7 +14,7 @@
         <java.version>1.8 </java.version>
         <testng.version>6.8.8</testng.version>
         <resetassured.version>3.0.3</resetassured.version>
-        <jackson.version>2.8.8</jackson.version>
+        <jackson.version>2.8.11</jackson.version>
         <lombok.version>1.16.8</lombok.version>
         <awaitility.version>1.7.0</awaitility.version>
     </properties>
